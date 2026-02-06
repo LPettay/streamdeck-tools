@@ -1,0 +1,9 @@
+# Runtime state
+scripts/current-mode.json
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# OS
+.DS_Store
