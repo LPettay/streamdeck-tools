@@ -1,0 +1,13 @@
+{
+  "name": "atem-streamdeck",
+  "version": "1.0.0",
+  "description": "ATEM Mini Pro scene switching service for Stream Deck",
+  "private": true,
+  "scripts": {
+    "start": "node service.js"
+  },
+  "dependencies": {
+    "atem-connection": "^3.6.0",
+    "obs-websocket-js": "^5.0.8"
+  }
+}

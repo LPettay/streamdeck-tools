@@ -1,5 +1,14 @@
-# Runtime state
+# Runtime state (written by buttons, polled by Stream Deck)
 scripts/current-mode.json
+scripts/game-mode.state
+scripts/atem/state.json
+
+# Local secrets and device dumps
+scripts/atem/obs.local.json
+scripts/atem/atem-state-dump.json
+
+# Dependencies
+node_modules/
 
 # Windows
 Thumbs.db
