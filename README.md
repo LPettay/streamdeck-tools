@@ -29,7 +29,7 @@ Uses the [Stateful Executor](https://marketplace.elgato.com/product/stateful-exe
 - **On poll:** Reads `current-mode.json` to update button icons
 - **Active mode** shows a bright colored icon; inactive modes show dimmed gray icons
 
-**If every button goes dead, restart Stream Deck.** When the plugin process crashes repeatedly (for example, an uncaught `ENOSPC` while logging on a full disk), Stream Deck marks it unstable and disables it. Every Stateful Executor button stops working until the app restarts. Failed polls don't crash the plugin, but each one writes a stack trace to its log (`%APPDATA%\Elgato\StreamDeck\Plugins\com.vlad-gramuzov.stream-deck-stateful-executor.sdPlugin\logs`). So state polls read plain files, and HTTP status endpoints return 200 even when the backing device is unreachable.
+**If every button goes dead, restart Stream Deck** (use the Restart Stream Deck button if the deck still responds; it runs `restart-streamdeck.ps1` detached from Stream Deck's process tree so the restart survives the kill, reaps orphaned plugin processes, and relaunches). When the plugin process crashes repeatedly (for example, an uncaught `ENOSPC` while logging on a full disk), Stream Deck marks it unstable and disables it. Every Stateful Executor button stops working until the app restarts. Failed polls don't crash the plugin, but each one writes a stack trace to its log (`%APPDATA%\Elgato\StreamDeck\Plugins\com.vlad-gramuzov.stream-deck-stateful-executor.sdPlugin\logs`). So state polls read plain files, and HTTP status endpoints return 200 even when the backing device is unreachable.
 
 ### Buttons
 
@@ -40,6 +40,7 @@ Uses the [Stateful Executor](https://marketplace.elgato.com/product/stateful-exe
 | ATEM output | `scripts/atem/atem-output.js toggle` | `scripts/atem/state.json` |
 | OBS projector | `scripts/atem/obs-projector.js 0` | `scripts/atem/projector-toggle.ps1 check` |
 | Game mode | `scripts/game-mode.bat` (runs `game-mode toggle` in WSL) | `scripts/game-mode.state` |
+| Restart Stream Deck | `scripts/restart-streamdeck.bat` | none |
 | Dreo fan | HTTP `localhost:8401` (served from WSL by `~/Genesis/apps/dreo`) | `GET /status` |
 
 ### Icons
