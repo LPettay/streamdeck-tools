@@ -1,5 +1,14 @@
-# Runtime state
+# Runtime state (written by buttons, polled by Stream Deck)
 scripts/current-mode.json
+scripts/game-mode.state
+scripts/atem/state.json
+
+# Local secrets and device dumps
+scripts/atem/obs.local.json
+scripts/atem/atem-state-dump.json
+
+# Dependencies
+node_modules/
 
 # Windows
 Thumbs.db
@@ -7,3 +16,11 @@ desktop.ini
 
 # OS
 .DS_Store
+scripts/audio-follow.state
+scripts/audio-follow.pid
+scripts/audio-follow.routed.json
+scripts/audio-follow.log
+__pycache__/
+
+# Third-party binary (NirSoft SoundVolumeView), downloaded locally
+tools/
