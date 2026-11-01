@@ -75,6 +75,7 @@ The remaining `atem-*.js` files (`dump`, `info`, `sniff`, `firmware`, `brightnes
 - Polls every 2 s; only shells out to SoundVolumeView when an app changes display.
 - Per-process, not per-tab: all Chrome windows share one audio process, so the largest Chrome window decides.
 - Setup: Windows Python with `pip install pycaw psutil pywin32`, and NirSoft SoundVolumeView x64 unzipped to `tools/soundvolumeview/` (gitignored, not redistributed). The TV is matched by monitor ID `VIZ…` and audio endpoint name containing `Vizio` (edit `TV_MONITOR_ID` / `TV_DEVICE_MATCH` at the top of the script).
+- Icons: `icons/audio-follow-{active,inactive}.png` (regenerate with `scripts/generate-audio-follow-icons.py`).
 - Debug: `python scripts/audio-follow.py --dry-run --once` prints the commands it would run. `--revert` sends routed apps back to the default device.
 - Reverting sets apps to the current default device explicitly (SoundVolumeView documents no "clear override"), so an app stays pinned if you later change the Windows default.
 
