@@ -74,6 +74,9 @@ The remaining `atem-*.js` files (`dump`, `info`, `sniff`, `firmware`, `brightnes
 
 - Polls every 2 s; only shells out to SoundVolumeView when an app changes display.
 - Per-process, not per-tab: all Chrome windows share one audio process, so the largest Chrome window decides.
+- Button: like every other button, its two commands point at the main checkout's `scripts` folder, never a worktree. Run: `C:\Users\Lance\Documents\Personal\Projects\streamdeck-tools\scripts\audio-follow.bat`. Status: `cmd.exe /c type "C:\Users\Lance\Documents\Personal\Projects\streamdeck-tools\scripts\audio-follow.state"`.
+- `tools/soundvolumeview/` must exist in that same checkout; it is gitignored, so `git pull` does not bring it. Without it the button changes nothing and `scripts/audio-follow.log` gets a line `missing <expected path>`.
+- Tests: `python3 -m unittest discover -s tests -v` from the repo root, on any OS, with only the standard library. No Windows, audio device or display needed.
 - Setup: Windows Python with `pip install pycaw psutil pywin32`, and NirSoft SoundVolumeView x64 unzipped to `tools/soundvolumeview/` (gitignored, not redistributed). The TV is matched by monitor ID `VIZ…` and audio endpoint name containing `Vizio` (edit `TV_MONITOR_ID` / `TV_DEVICE_MATCH` at the top of the script).
 - Icons: `icons/audio-follow-{active,inactive}.png` (regenerate with `scripts/generate-audio-follow-icons.py`).
 - Debug: `python scripts/audio-follow.py --dry-run --once` prints the commands it would run. `--revert` sends routed apps back to the default device.
