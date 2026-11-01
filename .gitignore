@@ -16,3 +16,11 @@ desktop.ini
 
 # OS
 .DS_Store
+scripts/audio-follow.state
+scripts/audio-follow.pid
+scripts/audio-follow.routed.json
+scripts/audio-follow.log
+__pycache__/
+
+# Third-party binary (NirSoft SoundVolumeView), downloaded locally
+tools/

@@ -40,6 +40,7 @@ Uses the [Stateful Executor](https://marketplace.elgato.com/product/stateful-exe
 | ATEM output | `scripts/atem/atem-output.js toggle` | `scripts/atem/state.json` |
 | OBS projector | `scripts/atem/obs-projector.js 0` | `scripts/atem/projector-toggle.ps1 check` |
 | Game mode | `scripts/game-mode.bat` (runs `game-mode toggle` in WSL) | `scripts/game-mode.state` |
+| Audio follows display | `scripts/audio-follow.bat` (toggles the daemon) | `scripts/audio-follow.state` |
 | Restart Stream Deck | `scripts/restart-streamdeck.bat` | none |
 | Dreo fan | HTTP `localhost:8401` (served from WSL by `~/Genesis/apps/dreo`) | `GET /status` |
 
@@ -67,6 +68,15 @@ OBS WebSocket credentials go in `scripts/atem/obs.local.json` (gitignored):
 ```
 
 The remaining `atem-*.js` files (`dump`, `info`, `sniff`, `firmware`, `brightness`, `videohub-brightness`) are diagnostics, not wired to buttons.
+
+### Audio follows display
+`audio-follow.py` routes each app's audio to the TV speakers while its window is on the TV, and leaves everything else on the default device. When the TV's audio endpoint goes inactive (TV off) or the TV display is gone, every routed app returns to the default device. Toggling the button off also reverts.
+
+- Polls every 2 s; only shells out to SoundVolumeView when an app changes display.
+- Per-process, not per-tab: all Chrome windows share one audio process, so the largest Chrome window decides.
+- Setup: Windows Python with `pip install pycaw psutil pywin32`, and NirSoft SoundVolumeView x64 unzipped to `tools/soundvolumeview/` (gitignored, not redistributed). The TV is matched by monitor ID `VIZ…` and audio endpoint name containing `Vizio` (edit `TV_MONITOR_ID` / `TV_DEVICE_MATCH` at the top of the script).
+- Debug: `python scripts/audio-follow.py --dry-run --once` prints the commands it would run. `--revert` sends routed apps back to the default device.
+- Reverting sets apps to the current default device explicitly (SoundVolumeView documents no "clear override"), so an app stays pinned if you later change the Windows default.
 
 ### Utilities
 - `get-mode.ps1` — Returns current mode as JSON
