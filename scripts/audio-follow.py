@@ -254,6 +254,7 @@ def main():
     args = ap.parse_args()
 
     if not args.dry_run and not SVV.exists():
+        log(f"missing {SVV}")  # a Stream Deck button shows no stderr
         sys.exit(f"missing {SVV}")
 
     if args.toggle:
